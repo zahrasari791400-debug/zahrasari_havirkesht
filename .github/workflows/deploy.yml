@@ -1,0 +1,25 @@
+name: Deploy to Liara
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Liara CLI
+        run: npm install -g @liara/cli
+
+      - name: Login and Deploy
+        env:
+          LIARA_EMAIL: ${{ secrets.LIARA_EMAIL }}
+          LIARA_PASSWORD: ${{ secrets.LIARA_PASSWORD }}
+        run: |
+          echo "$LIARA_PASSWORD" | liara login --email "$LIARA_EMAIL" --password
+          liara deploy --detach
