@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت مقیاس سنجش - سامانه هاویرکشت</title>
+    
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link href="fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="css/measurementpage.css">
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb-container">
+            <i class="ri-home-line" style="color: #087e67;"></i>
+            <i class="ri-arrow-left-s-line" style="color: #cbd5e1; margin: 0 8px;"></i>
+            <span style="color: #64748b;">داده اولیه</span>
+            <i class="ri-arrow-left-s-line" style="color: #cbd5e1; margin: 0 8px;"></i>
+            <span style="color: #64748b;">ثبت واحد اندازه گیری</span>
+        </div>
+
+        <div class="page-header-professional">
+            <div class="flex items-center gap-4">
+                <div class="page-icon-wrapper">
+                    <i class="fas fa-ruler" style="font-size: 40px; color: white;"></i>
+                </div>
+                <div>
+                    <h1 class="page-title-professional">مدیریت مقیاس‌ها</h1>
+                    <p class="page-subtitle">ثبت و مدیریت واحدهای اندازه‌گیری</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-professional-wrapper">
+            <div class="table-header-pro">
+                <div class="table-title-pro">
+                    <div class="table-title-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <span>مجموع مقیاس‌ها (<span id="measurementCount">6</span>)</span>
+                </div>
+                <div class="table-actions-pro">
+                    <div class="search-pro">
+                        <input type="text" placeholder="جستجو..." id="searchInput" onkeyup="window.measurementModule.filterTable()">
+                        <i class="ri-search-line"></i>
+                    </div>
+                    <button class="btn-pro btn-primary-pro" onclick="window.measurementModule.addMeasurement()">
+                        <i class="ri-add-line"></i>
+                        <span>ایجاد مقیاس جدید</span>
+                    </button>
+                </div>
+            </div>
+
+            <table id="measurementTable">
+                <thead>
+                    <tr>
+                        <th>عنوان</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <div class="pagination-pro">
+                <button class="page-btn-pro" onclick="window.measurementModule.prevPage()"><i class="ri-arrow-right-s-line"></i></button>
+                <button class="page-btn-pro active">۱</button>
+                <button class="page-btn-pro" onclick="window.measurementModule.nextPage()"><i class="ri-arrow-left-s-line"></i></button>
+                <div style="margin-right: 20px; color: #64748b; font-size: 14px;">
+                    صفحه <span style="color: #087e67; font-weight: 700;">۱</span> از <span style="color: #087e67; font-weight: 700;">۱</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/measurement.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود - سامانه هاویرکشت</title>
+        
+    <link  rel="stylesheet" href="css/tailwind.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="fonts/remixicon.css" rel="stylesheet">
+       
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    
+       <script src="js/sweetalert.js"></script>
+    
+    </head>
+<body>
+    <div class="login-container">
+        <div class="login-card flex">
+           
+            <div class="login-side flex-1">
+                <h1 class="text-3xl font-bold mb-2" style="color: #087e67;">خوش آمدید</h1>
+                <p class="text-gray-600 mb-8">لطفاً برای ورود به سیستم، اطلاعات خود را وارد کنید</p>
+                
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <label for="username">نام کاربری</label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            placeholder="نام کاربری خود را وارد کنید"
+                            value="edu_40111415036"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">رمز عبور</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="رمز عبور خود را وارد کنید"
+                            value="40111415036"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="remember" class="ml-2">
+                            <span class="text-sm text-gray-600">مرا به خاطر بسپار</span>
+                        </label>
+                        <a href="#" class="text-sm" style="color: #087e67;">فراموشی رمز عبور؟</a>
+                    </div>
+                    
+                    <button type="submit" class="btn-login" id="loginBtn">
+                        <span id="loginBtnText">ورود به سیستم</span>
+                        <i class="ri-loader-4-line hidden animate-spin" id="loginBtnLoader"></i>
+                    </button>
+                </form>
+                
+                <p class="text-center text-sm text-gray-600 mt-6">
+                    حساب کاربری ندارید؟ 
+                    <a href="#" style="color: #087e67; font-weight: 600;">ثبت نام کنید</a>
+                </p>
+            </div>
+            
+            
+            <div class="brand-side flex-1">
+                <div class="logo-icon">🌾</div>
+                <h2 class="text-3xl font-bold mb-4 text-center">سامانه هاویرکشت</h2>
+                <p class="text-center text-white/90 mb-8">
+                    سیستم جامع مدیریت کشاورزی
+                </p>
+                <div class="space-y-4 w-full max-w-sm">
+                    <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                        <i class="ri-shield-check-line text-2xl"></i>
+                        <span>امنیت بالا</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                        <i class="ri-cloud-line text-2xl"></i>
+                        <span>دسترسی آنلاین</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                        <i class="ri-customer-service-line text-2xl"></i>
+                        <span>پشتیبانی ۲۴ ساعته</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  <script src="js/login.js"></script>
+</body>
+</html>

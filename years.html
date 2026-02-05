@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت سال زراعی - سامانه هاویرکشت</title>
+    
+    <!-- Fonts -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link href="fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.min.css">
+    
+    <!-- API Script -->
+    <script src="api.js"></script>
+    <link rel="stylesheet" href="css/years.css">
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-container">
+            <i class="ri-home-line" style="color: #087e67;"></i>
+            <i class="ri-arrow-left-s-line" style="color: #cbd5e1; margin: 0 8px;"></i>
+            <span style="color: #64748b;">داده‌های اولیه</span>
+            <i class="ri-arrow-left-s-line" style="color: #cbd5e1; margin: 0 8px;"></i>
+            <span style="color: #64748b;">ثبت سال زراعی</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header-professional">
+            <div class="flex items-center gap-4">
+                <div class="page-icon-wrapper">
+                    <i class="ri-calendar-line" style="font-size: 40px; color: white;"></i>
+                </div>
+                <div>
+                    <h1 class="page-title-professional">ثبت سال زراعی</h1>
+                    <p class="page-subtitle">مدیریت سال‌های زراعی سیستم</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Wrapper -->
+        <div class="table-professional-wrapper">
+            <div class="table-header-pro">
+                <div class="table-title-pro">
+                    <div class="table-title-icon"><i class="ri-calendar-check-line"></i></div>
+                    <span>لیست سال‌های زراعی</span>
+                </div>
+                <div class="table-actions-pro">
+                    <div class="search-pro">
+                        <input type="text" placeholder="جستجو..." id="searchInput" onkeyup="window.yearModule.filterYearTable()">
+                        <i class="ri-search-line"></i>
+                    </div>
+                    <button class="btn-pro btn-primary-pro" onclick="window.yearModule.addYear()">
+                        <i class="ri-add-line"></i>
+                        <span>ایجاد سال زراعی جدید</span>
+                    </button>
+                    
+                </div>
+            </div>
+
+            <table id="yearTable">
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>سال زراعی</th>
+                        <th>تاریخ ایجاد</th>
+                        <th>شناسه</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody id="yearTableBody">
+                    <tr>
+                        <td colspan="5" class="loading">
+                            <i class="ri-loader-4-line" style="font-size: 24px; animation: spin 1s linear infinite;"></i>
+                            <p>در حال بارگذاری...</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination-pro">
+                <button class="page-btn-pro"><i class="ri-arrow-right-s-line"></i></button>
+                <button class="page-btn-pro active">۱</button>
+                <button class="page-btn-pro">۲</button>
+                <button class="page-btn-pro"><i class="ri-arrow-left-s-line"></i></button>
+                <div style="margin-right: 20px; color: #64748b; font-size: 14px;">
+                    تعداد: <span id="totalCount" style="color: #087e67; font-weight: 700;">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+   <script src="js/years.js"></script>
+</body>
+</html>

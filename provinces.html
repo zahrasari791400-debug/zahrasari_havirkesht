@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت استان - سامانه هاویرکشت</title>
+    
+    <!-- Fonts -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link href="fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="css/provinces.css">
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-container">
+            <i class="ri-home-line" style="color: #087e67;"></i>
+            <i class="ri-arrow-left-s-line" style="color: #cbd5e1; margin: 0 8px;"></i>
+            <span style="color: #64748b;">داده‌های اولیه</span>
+            <i class="ri-arrow-left-s-line" style="color: #cbd5e1; margin: 0 8px;"></i>
+            <span style="color: #64748b;">ثبت استان</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header-professional">
+            <div class="flex items-center gap-4">
+                <div class="page-icon-wrapper">
+                    <i class="fas fa-map-marked-alt" style="font-size: 40px; color: white;"></i>
+                </div>
+                <div>
+                    <h1 class="page-title-professional">مدیریت استان‌ها</h1>
+                    <p class="page-subtitle">ثبت و مدیریت اطلاعات استان‌های تحت پوشش</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-professional-wrapper">
+            <!-- Table Header -->
+            <div class="table-header-pro">
+                <div class="table-title-pro">
+                    <div class="table-title-icon">
+                        <i class="fas fa-location-dot"></i>
+                    </div>
+                    <span>لیست استان‌ها</span>
+                </div>
+                <div class="table-actions-pro">
+                    <div class="search-pro">
+                        <input type="text" placeholder="جستجوی استان..." id="searchInput" onkeyup="window.provinceModule.filterTable()">
+                        <i class="ri-search-line"></i>
+                    </div>
+                    <button class="btn-pro btn-primary-pro" onclick="window.provinceModule.addProvince()">
+                        <i class="ri-add-line"></i>
+                        <span>ثبت استان جدید</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table Info Row -->
+            <div class="table-info-row">
+                <div class="table-count">
+                    تعداد کل استان‌ها: <span id="provinceCount">5</span>
+                </div>
+                <div class="flex gap-2">
+                    <button class="btn-pro btn-secondary-pro" onclick="window.provinceModule.exportData()">
+                        <i class="ri-download-line"></i>
+                        <span>خروجی Excel</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <table id="provinceTable">
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>نام استان</th>
+                        <th>کد استان</th>
+                        <th>تاریخ ثبت</th>
+                        <th>وضعیت</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="ردیف">۱</td>
+                        <td data-label="نام استان">
+                            <div class="flex items-center justify-center gap-2">
+                                <i class="fas fa-location-dot" style="color: #087e67;"></i>
+                                <span class="font-bold">تهران</span>
+                            </div>
+                        </td>
+                        <td data-label="کد استان"><span class="badge-pro badge-info">۰۱</span></td>
+                        <td data-label="تاریخ ثبت">۱۴۰۴/۰۶/۰۱</td>
+                        <td data-label="وضعیت"><span class="badge-pro badge-success">فعال</span></td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editProvince(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteProvince(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="ردیف">۲</td>
+                        <td data-label="نام استان">
+                            <div class="flex items-center justify-center gap-2">
+                                <i class="fas fa-location-dot" style="color: #087e67;"></i>
+                                <span class="font-bold">اصفهان</span>
+                            </div>
+                        </td>
+                        <td data-label="کد استان"><span class="badge-pro badge-info">۰۳</span></td>
+                        <td data-label="تاریخ ثبت">۱۴۰۴/۰۶/۰۵</td>
+                        <td data-label="وضعیت"><span class="badge-pro badge-success">فعال</span></td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editProvince(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteProvince(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="ردیف">۳</td>
+                        <td data-label="نام استان">
+                            <div class="flex items-center justify-center gap-2">
+                                <i class="fas fa-location-dot" style="color: #087e67;"></i>
+                                <span class="font-bold">فارس</span>
+                            </div>
+                        </td>
+                        <td data-label="کد استان"><span class="badge-pro badge-info">۰۷</span></td>
+                        <td data-label="تاریخ ثبت">۱۴۰۴/۰۶/۱۰</td>
+                        <td data-label="وضعیت"><span class="badge-pro badge-success">فعال</span></td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editProvince(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteProvince(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="ردیف">۴</td>
+                        <td data-label="نام استان">
+                            <div class="flex items-center justify-center gap-2">
+                                <i class="fas fa-location-dot" style="color: #087e67;"></i>
+                                <span class="font-bold">لرستان</span>
+                            </div>
+                        </td>
+                        <td data-label="کد استان"><span class="badge-pro badge-info">۱۶</span></td>
+                        <td data-label="تاریخ ثبت">۱۴۰۴/۰۷/۲۷</td>
+                        <td data-label="وضعیت"><span class="badge-pro badge-success">فعال</span></td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editProvince(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteProvince(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="ردیف">۵</td>
+                        <td data-label="نام استان">
+                            <div class="flex items-center justify-center gap-2">
+                                <i class="fas fa-location-dot" style="color: #087e67;"></i>
+                                <span class="font-bold">خوزستان</span>
+                            </div>
+                        </td>
+                        <td data-label="کد استان"><span class="badge-pro badge-info">۰۶</span></td>
+                        <td data-label="تاریخ ثبت">۱۴۰۴/۰۸/۰۲</td>
+                        <td data-label="وضعیت"><span class="badge-pro badge-success">فعال</span></td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editProvince(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteProvince(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination-pro">
+                <button class="page-btn-pro"><i class="ri-arrow-right-s-line"></i></button>
+                <button class="page-btn-pro active">۱</button>
+                <button class="page-btn-pro">۲</button>
+                <button class="page-btn-pro">۳</button>
+                <button class="page-btn-pro"><i class="ri-arrow-left-s-line"></i></button>
+                <div style="margin-right: 20px; color: #64748b; font-size: 14px;">
+                    صفحه <span style="color: #087e67; font-weight: 700;">۱</span> از <span style="color: #087e67; font-weight: 700;">۱</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+      <script src="js/provinces.js"></script>
+</body>
+</html>

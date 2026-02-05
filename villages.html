@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت روستا - سامانه هاویرکشت</title>
+    
+    
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link href="fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.min.css">
+   <link rel="stylesheet" href="css/villages.css">
+    <script src="js/sweetalert.js"></script>
+    
+   
+
+</head>
+<body>
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-container">
+            <i class="ri-home-line" style="color: #087e67;"></i>
+            <i class="ri-arrow-left-s-line" style="color: #cbd5e1; margin: 0 8px;"></i>
+            <span style="color: #64748b;">هاویر کشت</span>
+            <i class="ri-arrow-left-s-line" style="color: #cbd5e1; margin: 0 8px;"></i>
+            <span style="color: #64748b;">ثبت روستا</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header-professional">
+            <div class="flex items-center gap-4">
+                <div class="page-icon-wrapper">
+                    <i class="fas fa-home" style="font-size: 22px; color: white;"></i>
+                </div>
+                <div>
+                    <h1 class="page-title-professional">ثبت روستا</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <span class="filter-label">استان:</span>
+                <select id="provinceFilter" class="filter-select" onchange="window.villageModule.filterVillageTable()">
+                    <option value="">همه استان‌ها</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">شهرستان:</span>
+                <select id="cityFilter" class="filter-select" onchange="window.villageModule.filterVillageTable()">
+                    <option value="">همه شهرستان‌ها</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-professional-wrapper">
+            <!-- Table Header -->
+            <div class="table-header-pro">
+                <div class="table-title-pro">
+                    <div class="table-title-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <span>مجموع روستا (<span id="villageCount">0</span>)</span>
+                </div>
+                <div class="table-actions-pro">
+                    <div class="search-pro">
+                        <input type="text" placeholder="جستجو..." id="searchInput" onkeyup="window.villageModule.filterVillageTable()">
+                        <i class="ri-search-line"></i>
+                    </div>
+                    <div class="filter-group" style="display: flex; align-items: center; gap: 8px;">
+                        <span class="filter-label" style="font-size: 14px; color: #64748b; white-space: nowrap;">تعداد سطر:</span>
+                        <select 
+                            id="rowsPerPage" 
+                            class="filter-select"
+                            onchange="window.villageModule.changeRowsPerPage(this.value)"
+                            style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; min-width: 80px;"
+                        >
+                            <option value="5">۵</option>
+                            <option value="7">۷</option>
+                            <option value="10" selected>۱۰</option>
+                            <option value="15">۱۵</option>
+                            <option value="20">۲۰</option>
+                            <option value="50">۵۰</option>
+                            <option value="100">همه</option>
+                        </select>
+                    </div>
+                   
+                    <button class="btn-pro btn-primary-pro" onclick="window.villageModule.addVillage()">
+                        <i class="ri-add-line"></i>
+                        <span>ایجاد روستا جدید</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <table id="villageTable">
+                <thead>
+                    <tr>
+                        <th>روستا</th>
+                        <th>تاریخ ایجاد</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="روستا">
+                            <div class="village-name">
+                                <i class="ri-add-circle-line"></i>
+                                <span>مالمیر</span>
+                            </div>
+                        </td>
+                        <td data-label="تاریخ ایجاد">۱۴۰۴/۰۲/۱۵</td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editVillage(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteVillage(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="روستا">
+                            <div class="village-name">
+                                <i class="ri-add-circle-line"></i>
+                                <span>عباس آباد</span>
+                            </div>
+                        </td>
+                        <td data-label="تاریخ ایجاد">۱۴۰۴/۰۲/۱۳</td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editVillage(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteVillage(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="روستا">
+                            <div class="village-name">
+                                <i class="ri-add-circle-line"></i>
+                                <span>سعیدآباد</span>
+                            </div>
+                        </td>
+                        <td data-label="تاریخ ایجاد">۱۴۰۴/۰1/27</td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editVillage(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteVillage(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td data-label="روستا">
+                            <div class="village-name">
+                                <i class="ri-add-circle-line"></i>
+                                <span>صالح آباد</span>
+                            </div>
+                        </td>
+                        <td data-label="تاریخ ایجاد">۱۴۰۴/۰1/27</td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editVillage(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteVillage(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td data-label="روستا">
+                            <div class="village-name">
+                                <i class="ri-add-circle-line"></i>
+                                <span>ناصروند</span>
+                            </div>
+                        </td>
+                        <td data-label="تاریخ ایجاد">۱۴۰۴/۰1/27</td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editVillage(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteVillage(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td data-label="روستا">
+                            <div class="village-name">
+                                <i class="ri-add-circle-line"></i>
+                                <span>امبر</span>
+                            </div>
+                        </td>
+                        <td data-label="تاریخ ایجاد">۱۴۰۴/۰1/27</td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editVillage(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteVillage(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td data-label="روستا">
+                            <div class="village-name">
+                                <i class="ri-add-circle-line"></i>
+                                <span>گریران</span>
+                            </div>
+                        </td>
+                        <td data-label="تاریخ ایجاد">۱۴۰۴/۰1/27</td>
+                        <td data-label="عملیات">
+                            <div class="flex justify-center gap-2">
+                                <i class="action-icon edit fas fa-edit" title="ویرایش" onclick="editVillage(this)"></i>
+                                <i class="action-icon delete fas fa-trash" title="حذف" onclick="deleteVillage(this)"></i>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td data-label="روستا">
+                            <div class="village-name">
+                                <i class="ri-add-circle-line"></i>
+                                <span>مقصودآباد</span>
+                            </div>
+                        </td>
+                       
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination-pro">
+                <button class="page-btn-pro"><i class="ri-arrow-right-s-line"></i></button>
+                <button class="page-btn-pro active">۱</button>
+                <button class="page-btn-pro">۲</button>
+                <button class="page-btn-pro">۳</button>
+                <button class="page-btn-pro"><i class="ri-arrow-left-s-line"></i></button>
+            </div>
+        </div>
+    </div>
+
+   <script src="js/villages.js"></script>
+</body>
+</html>
