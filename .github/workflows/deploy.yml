@@ -13,13 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Liara CLI
-        run: npm install -g @liara/cli
-
       - name: Deploy to Liara
-        env:
-          LIARA_EMAIL: ${{ secrets.LIARA_EMAIL }}
-          LIARA_PASSWORD: ${{ secrets.LIARA_PASSWORD }}
-        run: |
-          liara login --email "$LIARA_EMAIL" --password "$LIARA_PASSWORD"
-          liara deploy --detach
+        uses: liara-ir/github-action@v1
+        with:
+          liara-token: ${{ secrets.LIARA_API_TOKEN }}
+          app-name: zahrasari-havirkesht
