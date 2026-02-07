@@ -21,6 +21,12 @@
         
         if (!token) {
             console.error('❌ No access token found!');
+            // Redirect to login page
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
             return;
         }
         
@@ -33,6 +39,14 @@
         })
         .then(res => {
             console.log('📥 Response status:', res.status);
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('HTTP ' + res.status);
             return res.json();
         })

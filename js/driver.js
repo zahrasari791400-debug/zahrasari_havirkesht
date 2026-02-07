@@ -12,7 +12,15 @@
    
     function loadDrivers() {
         const token = getToken();
-        if (!token) return Promise.resolve({ items: [] });
+        if (!token) {
+            console.error('❌ No access token found!');
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
+            return Promise.resolve({ items: [] });
+        }
         
         return fetch(API_BASE_URL + '/driver/', {
             method: 'GET',
@@ -22,6 +30,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to load drivers');
             return res.json();
         })
@@ -43,7 +59,15 @@
     // ==========================================
     function loadCars() {
         const token = getToken();
-        if (!token) return Promise.resolve({ items: [] });
+        if (!token) {
+            console.error('❌ No access token found!');
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
+            return Promise.resolve({ items: [] });
+        }
         
         return fetch(API_BASE_URL + '/cars/', {
             method: 'GET',
@@ -53,6 +77,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to load cars');
             return res.json();
         })

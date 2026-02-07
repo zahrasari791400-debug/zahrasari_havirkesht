@@ -15,6 +15,12 @@
         
         if (!token) {
             console.error('❌ No access token found!');
+            // Redirect to login page
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
             return;
         }
         
@@ -27,6 +33,15 @@
         })
         .then(res => {
             console.log('📥 Provinces response status:', res.status);
+            if (res.status === 401) {
+                // Handle unauthorized access
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('HTTP error! status: ' + res.status);
             return res.json();
         })

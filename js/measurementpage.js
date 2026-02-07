@@ -14,6 +14,12 @@
         const token = getToken();
         if (!token) {
             console.warn('⚠️ No token found');
+            // Redirect to login page
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
             renderMeasurementsTable([]);
             return;
         }
@@ -26,6 +32,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to load measure units');
             return res.json();
         })

@@ -25,6 +25,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to load measure units');
             return res.json();
         })
@@ -155,6 +163,14 @@
             body: JSON.stringify(data)
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to create measure unit');
             return res.json();
         })
@@ -238,6 +254,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to delete measure unit');
             return res.json();
         })

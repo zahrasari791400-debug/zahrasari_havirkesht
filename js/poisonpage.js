@@ -13,6 +13,11 @@
         const token = getToken();
         if (!token) {
             console.warn('⚠️ No token found');
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
             renderTable([]);
             return Promise.resolve([]);
         }
@@ -25,6 +30,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to load pesticides');
             return res.json();
         })
@@ -45,7 +58,14 @@
     // ==========================================
     function loadMeasureUnits() {
         const token = getToken();
-        if (!token) return Promise.resolve([]);
+        if (!token) {
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
+            return Promise.resolve([]);
+        }
         
         return fetch(API_BASE_URL + '/measure_unit/', {
             method: 'GET',
@@ -55,6 +75,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to load measure units');
             return res.json();
         })
@@ -211,6 +239,14 @@
             body: JSON.stringify(data)
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to create pesticide');
             return res.json();
         })
@@ -276,6 +312,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to delete pesticide');
             return res.json();
         })

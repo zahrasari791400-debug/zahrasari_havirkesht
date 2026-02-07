@@ -14,6 +14,11 @@
         const token = getToken();
         if (!token) {
             console.warn('⚠️ No token found');
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
             renderDriversTable([]);
             return Promise.resolve([]);
         }
@@ -26,6 +31,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to load drivers');
             return res.json();
         })
@@ -46,7 +59,14 @@
     // ==========================================
     function loadCars() {
         const token = getToken();
-        if (!token) return Promise.resolve([]);
+        if (!token) {
+            if (typeof AuthUtils !== 'undefined') {
+                AuthUtils.requireAuth(true);
+            } else {
+                window.location.href = 'login.html';
+            }
+            return Promise.resolve([]);
+        }
         
         return fetch(API_BASE_URL + '/cars/', {
             method: 'GET',
@@ -56,6 +76,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to load cars');
             return res.json();
         })
@@ -250,6 +278,14 @@
             body: JSON.stringify(data)
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to create driver');
             return res.json();
         })
@@ -313,6 +349,14 @@
             }
         })
         .then(res => {
+            if (res.status === 401) {
+                if (typeof AuthUtils !== 'undefined') {
+                    AuthUtils.handleUnauthorized(new Error('Unauthorized'));
+                } else {
+                    window.location.href = 'login.html';
+                }
+                throw new Error('Unauthorized');
+            }
             if (!res.ok) throw new Error('Failed to delete driver');
             return res.json();
         })
