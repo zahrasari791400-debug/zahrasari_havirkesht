@@ -400,7 +400,7 @@ function loadPage(page) {
         'ثبت روستا': { html: 'villages.html', script: 'js/villages.js' },
         'operations': { html: 'operations.html', script: 'js/operations.js' },
                
-        'ثبت شهرستان': { html: 'CityRegiste.html', script: 'js/cityregiste.js' },
+        
         'ثبت واحد اندازه‌گیری': { html: 'MeasurementPage.html', script: 'js/measurement.js' },
         'ثبت سم': { html: 'PoisonPage.html', script: 'js/poisonpage.js' },
         'ثبت محصول': { html: 'ProductPage.html', script: 'js/productpage.js' },
